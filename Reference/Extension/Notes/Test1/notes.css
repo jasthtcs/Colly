@@ -1,0 +1,442 @@
+/* General Body and App Container Styles */
+body {
+    font-family: 'Roboto', 'Segoe UI', sans-serif; /* MD3 Recommended Font */
+    font-size: 14px; /* Slightly larger base font size */
+    background-color: #fcfcff; /* Material 3 Surface - Light theme */
+    color: #1c1b1f; /* Material 3 On Surface - Light theme */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Center the app container */
+    min-height: 100vh;
+    box-sizing: border-box;
+    line-height: 1.5;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 600px; /* Max width for better readability on larger screens */
+    margin: 0 auto;
+    background-color: #fef7ff; /* Material 3 Surface Container Low - Light */
+    border-radius: 12px; /* MD3 Medium corner radius */
+    box-shadow: 0 4px 8px 3px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.3); /* MD3 Elevation 2 */
+    overflow: hidden; /* Ensures child elements respect border radius */
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.app-header {
+    background-color: #e8def8; /* Material 3 Primary Container - Light */
+    color: #1d192b; /* Material 3 On Primary Container - Light */
+    padding: 12px 16px;
+    border-bottom: 1px solid #cac4d0; /* Material 3 Outline - Light */
+}
+
+.app-main-content {
+    padding: 16px;
+    flex-grow: 1;
+    overflow-y: auto; /* Allows content to scroll if it exceeds viewport */
+}
+
+.app-footer {
+    padding: 8px 16px;
+    background-color: #f0ecf4; /* Material 3 Surface Container High - Light */
+    border-top: 1px solid #cac4d0; /* Material 3 Outline - Light */
+}
+
+/* Tab Navigation */
+.tab-navigation-area {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.folder-tab-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 8px; /* Space between tab items */
+}
+
+.single-dropdown-tab-container {
+    position: relative;
+}
+
+.tab-button {
+    background-color: transparent; /* MD3 Text Button style */
+    border: none;
+    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500; /* Medium weight for tabs */
+    cursor: pointer;
+    border-radius: 20px; /* Pill shape for active tab indicator */
+    color: #49454f; /* Material 3 On Surface Variant - Light */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tab-button:hover {
+    background-color: #e8e0f0; /* Lighter than active, for hover */
+}
+
+.tab-button.active-tab {
+    background-color: #d0bcff; /* Material 3 Secondary Container - Light (example) */
+    color: #25135c; /* Material 3 On Secondary Container - Light (example) */
+    font-weight: 600;
+}
+
+#hardshipTabButton { /* Specific styling if needed, e.g., for alerts */
+    color: #b3261e; /* Material 3 Error - Light */
+}
+#hardshipTabButton.active-tab {
+    background-color: #f9dedc; /* Material 3 Error Container - Light */
+    color: #410e0b; /* Material 3 On Error Container - Light */
+}
+
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px); /* Position below the button with a small gap */
+    left: 0;
+    min-width: 180px;
+    background-color: #fef7ff; /* Material 3 Surface Container Low - Light */
+    border: 1px solid #cac4d0; /* Material 3 Outline - Light */
+    border-radius: 8px; /* MD3 Small corner radius */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* MD3 Elevation 1 */
+    z-index: 1000;
+    padding: 8px 0; /* Padding for items */
+    overflow: hidden;
+}
+
+.dropdown-menu.show-dropdown {
+    display: block;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: #1c1b1f; /* Material 3 On Surface - Light */
+    font-family: inherit;
+    font-size: 14px;
+    white-space: nowrap;
+    border: none; /* Remove individual borders */
+}
+
+.dropdown-item:hover {
+    background-color: #e8e0f0; /* Material 3 State Layers On Surface Variant (hover) */
+}
+
+.dropdown-item.active-item {
+    background-color: #d0bcff3c; /* Subtle highlight for active item */
+    font-weight: 500;
+}
+
+/* Tab Content & Form Container */
+.tab-content { display: none; }
+.tab-content.active-content { display: block; }
+
+.form-container {
+    background-color: #fffbff; /* Material 3 Surface (pure white) - Light */
+    padding: 20px;
+    border-radius: 8px; /* MD3 Small corner radius */
+    /* box-shadow: 0 1px 2px rgba(0,0,0,0.1); MD3 Elevation 0 or 1 if slightly raised */
+}
+
+/* Section Styling */
+.form-section {
+    margin-bottom: 24px; /* Increased spacing between sections */
+}
+.form-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-header {
+    font-size: 16px; /* Slightly larger for section headers */
+    font-weight: 600; /* Bolder */
+    color: #49454f; /* Material 3 On Surface Variant - Light */
+    margin-top: 20px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #cac4d0; /* Material 3 Outline - Light */
+}
+.form-container > .section-header:first-of-type { /* If a section header is the first child of form-container */
+    margin-top: 0;
+}
+
+
+/* Form Group Layout */
+.form-group {
+    margin-bottom: 16px; /* Consistent spacing */
+    display: grid;
+    grid-template-columns: 120px 1fr; /* Adjust label column width as needed */
+    align-items: center;
+    gap: 12px; /* Gap between label and field */
+}
+.form-group.top-row { /* For initials/timestamp */
+    grid-template-columns: auto 1fr auto auto;
+    gap: 8px;
+}
+.form-group.align-top label { /* For textareas */
+    align-self: flex-start;
+    padding-top: 8px; /* Align with text in textarea */
+}
+
+/* Labels */
+.form-group label {
+    text-align: right;
+    color: #49454f; /* Material 3 On Surface Variant - Light */
+    font-weight: 500;
+}
+label.inline-label { text-align: left; width: auto; } /* For checkboxes/radios next to label */
+
+/* Input Fields (Text, Textarea, Select, Date) */
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+    background-color: #f3edf7; /* Material 3 Surface Container Highest - Light (Filled text field) */
+    border: 1px solid #79747e; /* Material 3 Outline - Light (Enabled state) */
+    border-radius: 4px; /* MD3 Extra Small corner radius (for text fields) */
+    padding: 10px 12px; /* MD3 standard padding for text fields */
+    font-family: inherit;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #1c1b1f; /* Material 3 On Surface - Light */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+textarea {
+    resize: vertical;
+    min-height: 80px; /* Default height for textareas */
+}
+input[type="text"]::placeholder,
+textarea::placeholder {
+    color: #79747e; /* Material 3 On Surface Variant (placeholder) - Light */
+}
+
+/* Focus State for Inputs */
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #6750a4; /* Material 3 Primary - Light (Focus indicator) */
+    box-shadow: 0 0 0 2px #d0bcff; /* Focus ring, Primary color with opacity */
+}
+
+/* Radio Buttons and Checkboxes */
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 8px;
+    vertical-align: middle;
+    accent-color: #6750a4; /* Material 3 Primary - Light */
+    width: 18px;
+    height: 18px;
+}
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+    outline: 2px solid #d0bcff; /* Focus ring */
+    outline-offset: 2px;
+}
+
+/* Field Content & Radio/Checkbox Groups */
+.field-content, .radio-group, .field-content-row {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Default gap for items in a row */
+    flex-wrap: wrap;
+}
+.field-content .item { display: flex; align-items: center; }
+.radio-group { gap: 16px; } /* More space for radio button groups */
+.checkbox-row .item { margin-right: 10px; } /* Spacing for recap options */
+
+/* Buttons (General, Action, Group) */
+button { /* Base button style - use for Copy, New Note */
+    background-color: #6750a4; /* Material 3 Primary - Light */
+    color: #ffffff; /* Material 3 On Primary - Light */
+    border: none;
+    padding: 10px 24px; /* MD3 Button padding */
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 20px; /* Fully rounded (pill shape) for MD3 buttons */
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    text-transform: none; /* MD3 buttons are typically sentence case */
+}
+button:hover {
+    background-color: #5b4490; /* Darken primary for hover */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Subtle shadow on hover */
+}
+button:active {
+    background-color: #4f3a7b; /* Darker for active state */
+}
+
+.button-group {
+    text-align: right;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #cac4d0; /* Material 3 Outline - Light */
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px; /* Space between buttons */
+}
+
+.action-button { /* For '+' and '-' buttons in amount rows */
+    width: 36px; height: 36px; /* MD3 Icon Button size */
+    padding: 0;
+    line-height: 36px;
+    font-size: 20px;
+    margin-left: 8px;
+    flex-shrink: 0;
+    border-radius: 50%; /* Circular */
+    background-color: #e8def8; /* Material 3 Primary Container - Light */
+    color: #1d192b; /* Material 3 On Primary Container - Light */
+}
+.action-button:hover { background-color: #d0bcff; }
+
+/* Error Highlighting */
+.highlight-error,
+input.highlight-error,
+textarea.highlight-error,
+select.highlight-error {
+    border-color: #b3261e !important; /* Material 3 Error - Light */
+    background-color: #f9dedc !important; /* Material 3 Error Container - Light */
+}
+.highlight-error:focus {
+    box-shadow: 0 0 0 2px #f9dedc; /* Error focus ring */
+}
+
+/* Specific Component Styling */
+.amount-input-wrapper { display: flex; align-items: center; width: 100%; }
+.amount-row { margin-bottom: 8px; }
+#lastFourInput { width: 70px; }
+#timestamp { font-weight: 500; color: #49454f; }
+
+/* Notification Bar */
+.notification-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #313033; /* Material 3 Inverse Surface - Light (for Snackbars) */
+    color: #f4eff4; /* Material 3 Inverse On Surface - Light */
+    padding: 12px 18px;
+    border-radius: 4px; /* MD3 Snackbar radius */
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    visibility: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.notification-bar.show { opacity: 1; visibility: visible; }
+
+/* Advisement & Lists */
+.advisement {
+    padding: 12px;
+    margin-bottom: 16px;
+    background-color: #f0ecf4; /* Material 3 Surface Container High - Light */
+    border-left: 4px solid #6750a4; /* Material 3 Primary - Light */
+    border-radius: 4px;
+    font-style: italic;
+}
+.expectations-list {
+    list-style-type: disc;
+    padding-left: 24px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+.expectations-list li { margin-bottom: 6px; }
+
+/* Hardship Specifics */
+.hardship-question-group { margin-bottom: 16px; }
+.hardship-question-group label { display: block; font-weight: 500; margin-bottom: 6px; text-align: left; }
+.hardship-question-group .radio-group { padding-left: 0; /* Align with text inputs */ }
+
+/* ATP Options & Conditional Fields */
+.atp-options-group { grid-column: 2 / 3; display: flex; flex-direction: column; gap: 10px;}
+.atp-detail-fields {
+    display: none; /* Initially hidden, shown by JS */
+    flex-direction: column;
+    width: 100%;
+    padding-left: 20px; /* Indent ATP details */
+    margin-top: 8px;
+    border-left: 2px solid #e8def8; /* Subtle left border */
+}
+.atp-detail-fields.hidden { display: none !important; } /* Ensure JS can hide it */
+.atp-detail-fields .form-group { grid-template-columns: 1fr; margin-bottom: 8px; gap: 5px; }
+.atp-detail-fields .form-group label { text-align: left; font-size: 13px; color: #79747e;}
+
+.conditional-payment-section {
+    padding-left: 20px;
+    border-left: 2px solid #e8def8; /* Material 3 Primary Container (lighter shade for border) */
+    margin-left: 120px; /* Align with input fields, assuming label width is 120px */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px; /* Small padding at the bottom */
+}
+.conditional-payment-section.hidden { display: none !important; }
+.conditional-payment-section .form-group { grid-template-columns: auto 1fr; } /* Label takes auto width */
+.conditional-payment-section .form-group label { text-align: left; }
+.info-text { font-size: 12px; color: #79747e; }
+
+/* Utility */
+.hidden { display: none !important; } /* More specific to override other display properties */
+.input-short { width: 140px !important; flex-grow: 0; }
+
+/* Responsive adjustments if needed */
+@media (max-width: 480px) {
+    .form-group, .form-group.top-row {
+        grid-template-columns: 1fr; /* Stack label and input on small screens */
+    }
+    .form-group label, .form-group.top-row label {
+        text-align: left;
+        margin-bottom: 4px;
+    }
+    .form-group.align-top label {
+        padding-top: 0;
+    }
+    .atp-options-group { grid-column: 1 / -1; }
+    .conditional-payment-section { margin-left: 0; padding-left: 10px; }
+    .button-group { flex-direction: column; gap: 10px; }
+    .button-group button { width: 100%; }
+    .app-container { margin-top: 0; margin-bottom: 0; border-radius: 0;}
+}
+
+/* Styling for the new structure based on notes.html */
+#callHandlingSection, #answeredCallDetailsSection, #paymentDetailsUnified,
+#arrangementDetails, #moveNpdWrapper, #newEmailGroup, #atpOptionsWrapper,
+#onceOffPaymentFields, #scheduledPaymentFields, #pdAdvPaymentFields,
+#advancePaymentFields, #pastDuePaymentFields,
+#newAtpFields, #currentAtpFields {
+    /* Default state managed by 'hidden' class or JS, but can add base styles here if needed */
+}
+
+/* Ensure the timestamp is visible and styled */
+.timestamp-value {
+    font-weight: 500;
+    color: #49454f; /* Material 3 On Surface Variant */
+    font-size: 13px;
+}
+.time-label {
+    font-weight: 500;
+}
+
+/* Styling for reasonForCallCollections if it becomes visible */
+#reasonForCallCollections.hidden { display: none; }
+#reasonForCallCollections { margin-top: 8px; }
+
+/* Ensure form sections have consistent spacing */
+#unifiedNotesForm .form-section + .form-section {
+    margin-top: 24px;
+}
+
+/* Adjustments for the main content area for scrolling */
+.app-main-content {
+    max-height: calc(100vh - 150px); /* Adjust based on header/footer height */
+    overflow-y: auto;
+}
