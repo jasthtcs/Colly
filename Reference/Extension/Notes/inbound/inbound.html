@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbound Call Notes</title>
+    <link rel="stylesheet" href="inbound.css">
+</head>
+<body>
+    <div class="tab-navigation-area">
+        <div class="folder-tab-bar">
+            <div class="single-dropdown-tab-container">
+                <button id="activeSectionButton" class="tab-button active-tab">Inbound &#9660;</button>
+                <div id="sectionDropdownMenu" class="dropdown-menu">
+                    <a class="dropdown-item active-item" href="inbound.html" data-label="Inbound">Inbound</a>
+                    <a class="dropdown-item" href="../collections/collections.html" data-label="Collections">Collections</a>
+                    <a class="dropdown-item" href="#" data-label="Digital">Digital</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="inboundTabContent" class="tab-content active-content">
+            <div class="container">
+                <div class="form-group top-row">
+                    <label for="initialsInput">Initials:</label>
+                    <div class="field-content">
+                        <input type="text" id="initialsInput" placeholder="Enter Initials" maxlength="2">
+                    </div>
+                    <label for="timestamp" class="time-label">Time:</label>
+                    <span id="timestamp" class="timestamp-value">00:00 AM 00/00/00</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <div class="field-content">
+                        <select id="category" style="width: 100%;">
+                            <option value="Inbound Call">Inbound Call</option>
+                            <option value="Outbound Call">Outbound Call</option>
+                            <option value="Email">Email</option>
+                            <option value="Chat">Chat</option>
+                            <option value="Meeting">Meeting</option>
+                            <option value="Follow-up">Follow-up</option>
+                            <option value="Internal">Internal</option>
+                            <option value="Issue">Issue</option>
+                            <option value="Resolution">Resolution</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Caller Type:</label>
+                    <div class="field-content radio-group">
+                        <div class="item">
+                            <input type="radio" id="accountHolder" name="callerType" value="Account Holder" checked>
+                            <label for="accountHolder">Account Holder</label>
+                        </div>
+                        <div class="item">
+                            <input type="radio" id="atp" name="callerType" value="ATP">
+                            <label for="atp">ATP</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header">Housekeeping Details</div>
+
+                <div class="form-group">
+                    <label>Changes:</label>
+                    <div class="field-content-row">
+                        <div class="item">
+                            <input type="checkbox" id="emailChanged">
+                            <label for="emailChanged">Update Email?</label>
+                        </div>
+                        <div class="item">
+                            <input type="checkbox" id="atpChanged">
+                            <label for="atpChanged">Update ATP?</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="newEmailGroup" style="display: none;">
+                    <label for="newEmail">New Email:</label>
+                    <div class="field-content">
+                        <input type="text" id="newEmail" placeholder="New Email Address">
+                    </div>
+                </div>
+
+                <div class="form-group" id="atpOptionsWrapper" style="display: none;">
+                    <label></label> <div class="field-content atp-options-group">
+                        <div class="radio-group">
+                            <div class="item">
+                                <input type="radio" id="newAtpOption" name="atpUpdateType" value="New ATP">
+                                <label for="newAtpOption">New ATP</label>
+                            </div>
+                            <div class="item">
+                                <input type="radio" id="currentAtpOption" name="atpUpdateType" value="Current ATP">
+                                <label for="currentAtpOption">Current ATP</label>
+                            </div>
+                        </div>
+
+                        <div id="newAtpFields" class="atp-detail-fields">
+                            <div class="form-group">
+                                <label>Name:</label>
+                                <input type="text" id="newAtpName" placeholder="ATP Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input type="text" id="newAtpEmail" placeholder="ATP Email Address">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone:</label>
+                                <input type="text" id="newAtpPhone" placeholder="ATP Phone Number" maxlength="10">
+                            </div>
+                            <div class="form-group">
+                                <label>Relationship:</label>
+                                <input type="text" id="newAtpRelationship" placeholder="Relationship">
+                            </div>
+                        </div>
+
+                        <div id="currentAtpFields" class="atp-detail-fields">
+                            <div class="form-group">
+                                <label>Update Name:</label>
+                                <input type="text" id="currentAtpName" placeholder="Update Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Update Email:</label>
+                                <input type="text" id="currentAtpEmail" placeholder="Update Email Address">
+                            </div>
+                            <div class="form-group">
+                                <label>Update Phone:</label>
+                                <input type="text" id="currentAtpPhone" placeholder="Update Phone Number">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-header">Call Details</div>
+
+                <div class="form-group align-top">
+                    <label for="customerConcern">Customer Concern:</label>
+                    <div class="field-content">
+                        <textarea id="customerConcern" placeholder="Enter primary concern here..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group payment-checkbox-group"> 
+                    <label></label> 
+                    <div class="field-content">
+                        <div class="item">
+                            <input type="checkbox" id="customerWantsToPay">
+                            <label for="customerWantsToPay">Process a Payment?</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="paymentOptionsDiv" style="display: none;">
+                    <div class="form-group">
+                        <label>Payment Type:</label>
+                        <div class="field-content radio-group">
+                            <div class="item">
+                                <input type="radio" id="paymentTypeOnceOff" name="paymentType" value="OnceOff">
+                                <label for="paymentTypeOnceOff">Once-Off Payment</label>
+                            </div>
+                            <div class="item">
+                                <input type="radio" id="paymentTypePdAdv" name="paymentType" value="PDADV">
+                                <label for="paymentTypePdAdv">PD / ADV</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="onceOffPaymentDetailsDiv" style="display: none;" class="conditional-payment-section">
+                        <div class="form-group">
+                            <label for="onceOffPaymentAmountInput">Amount ($):</label>
+                            <div class="field-content">
+                                <input type="text" id="onceOffPaymentAmountInput" placeholder="0.00">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label></label>
+                            <div class="field-content">
+                                <span class="info-text">Advised customer about the $2.95 processing fee</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="pdAdvDetailsDiv" style="display: none;" class="conditional-payment-section">
+                        <div class="form-group">
+                            <label>Payment Option:</label>
+                            <div class="field-content radio-group">
+                                <div class="item">
+                                    <input type="radio" id="pdAdvTypeAdvance" name="pdAdvSubType" value="Advance">
+                                    <label for="pdAdvTypeAdvance">Advance Payment</label>
+                                </div>
+                                <div class="item">
+                                    <input type="radio" id="pdAdvTypePastDue" name="pdAdvSubType" value="PastDue">
+                                    <label for="pdAdvTypePastDue">Past Due Payment</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="advancePaymentDetailsDiv" style="display: none;" class="conditional-payment-section">
+                            <div class="form-group">
+                                <label for="advancePaymentAmount">Amount ($):</label>
+                                <div class="field-content">
+                                    <input type="text" id="advancePaymentAmount" placeholder="0.00">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="pastDuePaymentDetailsDiv" style="display: none;" class="conditional-payment-section">
+                            <div class="form-group">
+                                <label for="pastDuePaymentAmount">Amount ($):</label>
+                                <div class="field-content">
+                                    <input type="text" id="pastDuePaymentAmount" placeholder="0.00">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="daysPastDue">Days Past Due:</label>
+                                <div class="field-content">
+                                    <input type="text" id="daysPastDue" placeholder="e.g., 30">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group align-top">
+                    <label for="agentResolution">Agent Resolution:</label>
+                    <div class="field-content">
+                        <textarea id="agentResolution"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Recap:</label>
+                    <div class="field-content checkbox-row" id="recapOptions">
+                        <div class="item flex-row">
+                            <input type="checkbox" id="advisedNPD">
+                            <label for="advisedNPD">Advised NPD</label>
+                            <input type="date" id="nextNPDDate" disabled style="width: 120px;">
+                        </div>
+                        <div class="item">
+                            <input type="checkbox" id="selfHelp">
+                            <label for="selfHelp">Offered Self-Help</label>
+                        </div>
+                        <div class="item">
+                            <input type="checkbox" id="survey">
+                            <label for="survey">Offered Survey</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" id="copyToClipboardButton">Copy to Clipboard</button>
+                    <button type="button" id="newNoteButton">New Note</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification"></div>
+
+    <script src="inbound.js" defer></script>
+</body>
+</html>

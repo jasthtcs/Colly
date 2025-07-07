@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Collections & Notes Tools",
+  "version": "1.3",
+  "description": "Opens the Collection Tracker and Notes tools with shortcuts.",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Collections & Notes Tools"
+  },
+  "commands": {
+    "open-tracker": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+J"
+      },
+      "description": "Open the Collection Tracker"
+    },
+    "open-notes": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+H"
+      },
+      "description": "Open the Notes Tool"
+    }
+  }
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections Timeline Tracker</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="main-container">
+        <form id="day-form" class="input-card">
+            <input type="number" id="day-input" class="day-input-field" placeholder="Day" required>
+            <button type="submit" class="submit-button">
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+        </form>
+
+        <div class="results-card">
+            <h2 id="milestone-title">Enter a Day</h2>
+
+            <div class="info-grid">
+                <div class="info-box">
+                    <div class="info-header">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                        Follow-Up
+                    </div>
+                    <p id="follow-up-date-container">
+                        <span id="follow-up-day">—</span>
+                        <span id="follow-up-month"></span>
+                        <span id="follow-up-year"></span>
+                    </p>
+                </div>
+                <div class="info-box">
+                    <div class="info-header">
+                        <span class="material-symbols-outlined">notifications_active</span>
+                        Next Action
+                    </div>
+                    <p id="next-action">—</p>
+                </div>
+            </div>
+
+            <div class="task-section">
+                <h3>Required Tasks</h3>
+                <div id="required-tasks-list">
+                    <div class="task-item" id="task-item-1">
+                        <span class="material-symbols-outlined">check_circle</span>
+                        <span class="task-text" id="task-text-1"></span>
+                    </div>
+                    <div class="task-item" id="task-item-2" style="display: none;">
+                        <span class="material-symbols-outlined">check_circle</span>
+                        <span class="task-text" id="task-text-2"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="theme-menu" class="theme-menu hidden">
+        <h4>Choose Theme</h4>
+        <div id="theme-swatches" class="theme-swatches"></div>
+        <p id="theme-name-display" class="theme-name-display"></p>
+        <div class="toggle-section">
+            <div class="toggle-option">
+                <label for="dark-mode-switch">Dark Mode</label>
+                <label class="switch">
+                    <input type="checkbox" id="dark-mode-switch">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <button id="settings-button" class="settings-button">
+        <span class="material-symbols-outlined">settings</span>
+    </button>
+    
+    <script src="script.js"></script>
+</body>
+</html>

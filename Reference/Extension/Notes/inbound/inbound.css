@@ -1,0 +1,176 @@
+body {
+    font-family: 'Consolas', 'Menlo', 'Courier New', monospace;
+    font-size: 13px;
+    background-color: #FFFFFF;
+    color: #000000;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+.tab-navigation-area {
+    width: 95%;
+    max-width: 480px;
+    margin: 0 auto 0 auto;
+}
+.folder-tab-bar {
+    display: flex;
+    position: relative;
+    z-index: 1;
+    margin-bottom: -1px;
+}
+.tab-button, button {
+    background-color: #F0F0F0;
+    border: 1px solid #CCCCCC;
+    padding: 5px 10px;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-left: 8px;
+}
+.tab-button.active-tab {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+}
+button:hover {
+    background-color: #E0E0E0;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 10;
+    padding: 0;
+}
+.dropdown-menu.show-dropdown { display: block; }
+.dropdown-item {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #000000;
+    font-family: inherit;
+    font-size: inherit;
+    border-bottom: 1px solid #F0F0F0;
+    white-space: nowrap;
+}
+.dropdown-item:last-child { border-bottom: none; }
+.dropdown-item:hover { background-color: #0078D4; color: #FFFFFF; }
+.dropdown-item.active-item { background-color: #E0E0E0; font-weight: bold; }
+.tab-content { display: none; }
+.tab-content.active-content { display: block; }
+.container {
+    border: 1px solid #CCCCCC;
+    background-color: #FFFFFF;
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+.section-header {
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #EEEEEE;
+}
+.form-group {
+    margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    align-items: center;
+    gap: 10px;
+}
+.form-group-full {
+    grid-template-columns: 1fr;
+}
+.form-group.top-row {
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 5px;
+}
+.form-group label { text-align: right; }
+.form-group.align-top label { align-self: flex-start; padding-top: 5px; }
+input[type="text"],
+textarea,
+input[type="date"],
+select {
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+    padding: 4px;
+    font-family: inherit;
+    font-size: inherit;
+    width: 100%;
+    box-sizing: border-box;
+}
+textarea { resize: vertical; min-height: 60px; }
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+input:focus, textarea:focus, select:focus {
+    outline: 2px solid #0078D4;
+    border-color: transparent;
+}
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+    outline: none;
+}
+input[type="radio"]:focus-visible,
+input[type="checkbox"]:focus-visible {
+    box-shadow: 0 0 0 2px #cde6ff;
+}
+.button-group {
+    text-align: right;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #EEEEEE;
+}
+.highlight-error {
+    border-color: #E74C3C !important;
+    background-color: #fceae8;
+}
+.highlight-error:focus {
+    outline: none;
+    border-color: #E74C3C !important;
+}
+.form-group .field-content, .radio-group, .form-group .field-content-row { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    flex-wrap: wrap; 
+}
+.atp-detail-fields { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.atp-options-group { grid-column: 2 / 3; }
+.atp-detail-fields { flex-direction: column; }
+.atp-detail-fields .form-group { grid-template-columns: 1fr; margin-bottom: 0px; gap: 5px; align-items: center; }
+.atp-detail-fields .form-group label { text-align: left; }
+.conditional-payment-section { padding-left: 10px; border-left: 2px solid #EEEEEE; margin-left: 100px; margin-bottom: 8px; padding-top: 5px; }
+.conditional-payment-section .form-group { grid-template-columns: auto 1fr; }
+.conditional-payment-section .form-group label { text-align: left; }
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+fieldset:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+.input-short {
+    width: 120px !important;
+    flex-grow: 0;
+}
+.hidden {
+    display: none;
+}

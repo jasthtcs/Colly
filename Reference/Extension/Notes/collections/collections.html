@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections Notes</title>
+    <link rel="stylesheet" href="collections.css">
+</head>
+<body>
+    <div class="tab-navigation-area">
+        <div class="folder-tab-bar">
+            <div class="single-dropdown-tab-container">
+                <button id="activeSectionButton" class="tab-button active-tab">Collections &#9660;</button>
+                <div id="sectionDropdownMenu" class="dropdown-menu">
+                    <a class="dropdown-item" href="../inbound/inbound.html" data-label="Inbound">Inbound</a>
+                    <a class="dropdown-item active-item" href="collections.html" data-label="Collections">Collections</a>
+                    <a class="dropdown-item" href="#" data-label="Digital">Digital</a>
+                </div>
+            </div>
+            <button id="hardshipTabButton" class="tab-button hidden">Hardship</button>
+        </div>
+
+        <div id="collectionsTabContent" class="tab-content active-content">
+            <div class="container">
+                <form id="collectionsForm">
+                    <div class="form-group top-row">
+                        <label for="initialsInput">Initials:</label>
+                        <div class="field-content">
+                            <input type="text" id="initialsInput" placeholder="Enter Initials" maxlength="2">
+                        </div>
+                        <label for="timestamp" class="time-label">Time:</label>
+                        <span id="timestamp" class="timestamp-value">00:00 AM 00/00/00</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Options:</label>
+                        <div class="field-content">
+                            <div class="item">
+                                <input type="checkbox" id="noAnswerCheckbox">
+                                <label for="noAnswerCheckbox">No Answer</label>
+                            </div>
+                            <div class="item">
+                                <input type="checkbox" id="paymentTakenCheckbox">
+                                <label for="paymentTakenCheckbox">Payment Taken</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="actionsWrapper">
+                        <label for="actionsDropdown">Action:</label>
+                        <div class="field-content">
+                           <select id="actionsDropdown">
+                                <option value=""></option>
+                                <option value="SMS sent">SMS sent</option>
+                                <option value="Email sent">Email sent</option>
+                                <option value="Paynow Link sent">Paynow Link sent</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="paymentDetails" class="hidden">
+                        <div id="amountInputsContainer">
+                        </div>
+                        <div class="form-group">
+                            <label>Status:</label>
+                            <div class="field-content radio-group">
+                                <div class="item"><input type="radio" id="statusArrears" name="accountStatus" value="Arrears"><label for="statusArrears">Arrears</label></div>
+                                <div class="item"><input type="radio" id="statusCurrent" name="accountStatus" value="Current"><label for="statusCurrent">Current</label></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="answeredCallDetails" class="hidden">
+                        <div class="form-group">
+                            <label>Caller Type:</label>
+                            <div class="field-content radio-group">
+                                <div class="item"><input type="radio" id="callerTypeAH" name="callerType" value="AH"><label for="callerTypeAH">AH</label></div>
+                                <div class="item"><input type="radio" id="callerTypeATP" name="callerType" value="ATP"><label for="callerTypeATP">ATP</label></div>
+                                <div class="item"><input type="radio" id="callerTypeUTP" name="callerType" value="UTP"><label for="callerTypeUTP">UTP</label></div>
+                            </div>
+                        </div>
+                        
+                        <div class="section-header">Call Details</div>
+                        <div class="form-group"><label for="reasonForCall">Reason for Call:</label><select id="reasonForCall"><option value="Insufficient Funds">Insufficient Funds</option><option value="Stolen Card">Stolen Card</option><option value="Invalid Card">Invalid Card</option><option value="Expired Card">Expired Card</option></select></div>
+                        <div class="form-group"><label></label><div class="field-content"><div class="item"><input type="checkbox" id="addBankCheckbox"><label for="addBankCheckbox">Add Bank</label></div><div class="item"><input type="checkbox" id="addCardCheckbox"><label for="addCardCheckbox">Add Card</label></div><div id="lastFourWrapper" class="item hidden"><input type="text" id="lastFourInput" placeholder="XXXX" maxlength="4"></div></div></div>
+                        <div class="form-group align-top"><label for="discussionNotes">Discussion:</label><textarea id="discussionNotes" placeholder="Enter call details..."></textarea></div>
+                        <div class="form-group"><label></label><div class="field-content"><div class="item"><input type="checkbox" id="hardshipCheckbox"><label for="hardshipCheckbox">Hardship</label></div><div class="item"><input type="checkbox" id="arrangementCheckbox"><label for="arrangementCheckbox">Arrangement</label></div></div></div>
+                        <div id="moveNpdWrapper" class="form-group hidden"><label>Move NPD to:</label><div class="field-content"><span id="moveNpdDisplay"></span></div></div>
+                        <div id="arrangementDetails" class="hidden"><div class="form-group"><label>Arr. Amount ($):</label><input type="text" id="arrangementAmount" placeholder="0.00"></div><div class="form-group"><label>Arr. Date:</label><input type="date" id="arrangementDate"></div></div>
+
+                        <div class="section-header">Housekeeping Details</div>
+                        <div class="form-group"><label>Changes:</label><div class="field-content-row"><div class="item"><input type="checkbox" id="emailChanged"><label for="emailChanged">Update Email?</label></div><div class="item"><input type="checkbox" id="atpChanged"><label for="atpChanged">Update ATP?</label></div></div></div>
+                        <div class="form-group" id="newEmailGroup" style="display: none;"><label for="newEmail">New Email:</label><input type="text" id="newEmail" placeholder="New Email Address"></div>
+                        <div id="atpOptionsWrapper" class="form-group" style="display: none;"><label></label><div class="field-content atp-options-group"><div class="radio-group"><div class="item"><input type="radio" id="newAtpOption" name="atpUpdateType" value="New ATP"><label for="newAtpOption">New ATP</label></div><div class="item"><input type="radio" id="currentAtpOption" name="atpUpdateType" value="Current ATP"><label for="currentAtpOption">Current ATP</label></div></div><div id="newAtpFields" class="atp-detail-fields"><div class="form-group"><label>Name:</label><input type="text" id="newAtpName" placeholder="ATP Name"></div><div class="form-group"><label>Email:</label><input type="text" id="newAtpEmail" placeholder="ATP Email Address"></div><div class="form-group"><label>Phone:</label><input type="text" id="newAtpPhone" placeholder="ATP Phone Number" maxlength="10"></div><div class="form-group"><label>Relationship:</label><input type="text" id="newAtpRelationship" placeholder="Relationship"></div></div><div id="currentAtpFields" class="atp-detail-fields"><div class="form-group"><label>Update Name:</label><input type="text" id="currentAtpName" placeholder="Update Name"></div><div class="form-group"><label>Update Email:</label><input type="text" id="currentAtpEmail" placeholder="Update Email Address"></div><div class="form-group"><label>Update Phone:</label><input type="text" id="currentAtpPhone" placeholder="Update Phone Number"></div></div></div></div>
+
+                        <div class="section-header">Recap</div>
+                        <div class="form-group"><label>Options:</label><div class="field-content"><div class="item"><input type="checkbox" id="advisedNpdCheckbox"><label for="advisedNpdCheckbox">Advised NPD</label></div><div class="item date-picker-wrapper"><input type="date" id="advisedNpdInput" disabled></div><div class="item"><input type="checkbox" id="selfHelpCheckbox"><label for="selfHelpCheckbox">Offered Self-Help</label></div></div></div>
+                    </div>
+                </form>
+                <div class="button-group"><button type="button" id="copyToClipboardButton">Copy to Clipboard</button><button type="button" id="newNoteButton">New Note</button></div>
+            </div>
+        </div>
+        
+        <div id="hardshipContentPanel" class="tab-content hidden">
+             <div class="container">
+                <div class="advisement"><i>"To help our team understand your situation better, I need to ask a few questions. Please know there are no wrong answers, and if any question makes you uncomfortable, just let me know and we can skip it. Once we're done, I'll forward this to our dedicated hardship team for assessment. Is that okay with you?"</i></div>
+                <div class="form-group"><label for="hardshipCategory">Hardship Category:</label><select id="hardshipCategory"><option value="unemployed">Lost Job or Unemployed</option><option value="reducedIncome">Reduced Income</option><option value="overcommitted">Overcommitted</option><option value="unexpectedBills">Unexpected Bills</option><option value="injuryIllness">Injury or Illness</option><option value="familyBreakdown">Family Breakdown</option><option value="financialAbuse">Domestic or Financial Abuse</option><option value="naturalDisaster">Natural Disaster</option><option value="other">Other</option></select></div>
+                <div id="hardshipQuestionsContainer"></div>
+                <div class="section-header">Set Expectations</div>
+                <ul class="expectations-list">
+                    <li>Someone will get back to you within 5 business days.</li>
+                    <li>If we are unable to reach out via phone we will send you an email.</li>
+                    <li>We might require some supporting documentation from you to help with your assessment.</li>
+                    <li>We have temporarily Paused your repayments until we have completed our Hardship assessment and have a resolution for you.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="notification"></div>
+    <script src="hardship.js" defer></script>
+    <script src="collections.js" defer></script>
+</body>
+</html>
