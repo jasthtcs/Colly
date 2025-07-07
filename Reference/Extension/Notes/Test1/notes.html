@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merged Notes Application</title>
+    <link rel="stylesheet" href="notes.css">
+    <!-- Consider adding Material Design 3 components/styles later -->
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="tab-navigation-area">
+                <div class="folder-tab-bar">
+                    <!-- Dropdown for selecting Note Type (Inbound, Collections, etc.) -->
+                    <div class="single-dropdown-tab-container">
+                        <button id="noteTypeButton" class="tab-button active-tab">Note Type &#9660;</button>
+                        <div id="noteTypeDropdownMenu" class="dropdown-menu">
+                            <a class="dropdown-item active-item" href="#" data-type="unified">Unified View</a>
+                            <!-- We can add options to filter or switch views if needed -->
+                        </div>
+                    </div>
+                    <!-- Hardship tab, initially hidden, shown when relevant -->
+                    <button id="hardshipTabButton" class="tab-button hidden">Hardship</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="app-main-content">
+            <div id="unifiedNoteContent" class="tab-content active-content">
+                <div class="form-container">
+                    <form id="unifiedNotesForm">
+                        <!-- Section 1: Common Top Row (Initials, Timestamp) -->
+                        <section class="form-section">
+                            <div class="form-group top-row">
+                                <label for="initialsInput">Initials:</label>
+                                <div class="field-content">
+                                    <input type="text" id="initialsInput" placeholder="AB" maxlength="2">
+                                </div>
+                                <label for="timestamp" class="time-label">Time:</label>
+                                <span id="timestamp" class="timestamp-value">00:00 AM 00/00/00</span>
+                            </div>
+                        </section>
+
+                        <!-- Section 2: Interaction Type / Category -->
+                        <section class="form-section">
+                            <div class="form-group">
+                                <label for="interactionCategory">Category:</label>
+                                <div class="field-content">
+                                    <select id="interactionCategory">
+                                        <option value="Inbound Call">Inbound Call</option>
+                                        <option value="Outbound Call">Outbound Call</option>
+                                        <option value="Collections Call">Collections Call</option>
+                                        <option value="Email">Email</option>
+                                        <option value="Chat">Chat</option>
+                                        <option value="Meeting">Meeting</option>
+                                        <option value="Follow-up">Follow-up</option>
+                                        <option value="Internal">Internal</option>
+                                        <option value="Issue">Issue</option>
+                                        <option value="Resolution">Resolution</option>
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label>Caller Type:</label>
+                                <div class="field-content radio-group">
+                                    <div class="item"><input type="radio" id="callerTypeAH" name="callerType" value="AH" checked><label for="callerTypeAH">Account Holder</label></div>
+                                    <div class="item"><input type="radio" id="callerTypeATP" name="callerType" value="ATP"><label for="callerTypeATP">ATP</label></div>
+                                    <div class="item"><input type="radio" id="callerTypeUTP" name="callerType" value="UTP"><label for="callerTypeUTP">UTP</label></div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 3: Call Handling Options (No Answer, Actions from Collections) -->
+                        <section class="form-section" id="callHandlingSection">
+                            <div class="form-group">
+                                <label>Call Status:</label>
+                                <div class="field-content">
+                                    <div class="item">
+                                        <input type="checkbox" id="noAnswerCheckbox">
+                                        <label for="noAnswerCheckbox">No Answer</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" id="outboundActionsWrapper">
+                                <label for="outboundActionsDropdown">Action:</label>
+                                <div class="field-content">
+                                   <select id="outboundActionsDropdown">
+                                        <option value=""></option>
+                                        <option value="SMS sent">SMS sent</option>
+                                        <option value="Email sent">Email sent</option>
+                                        <option value="Paynow Link sent">Paynow Link sent</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 4: Main Details (Concern, Discussion, Resolution) -->
+                        <div id="answeredCallDetailsSection">
+                            <section class="form-section">
+                                <h2 class="section-header">Call Details</h2>
+                                <div class="form-group align-top">
+                                    <label for="customerConcern">Concern/Reason:</label>
+                                    <textarea id="customerConcern" placeholder="Enter primary concern or reason for call..."></textarea>
+                                </div>
+                                <div class="form-group align-top">
+                                    <label for="discussionNotes">Discussion:</label>
+                                    <textarea id="discussionNotes" placeholder="Enter call discussion details..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reasonForCallCollections" class="hidden">Reason (Collections):</label>
+                                    <select id="reasonForCallCollections" class="hidden">
+                                        <option value="Insufficient Funds">Insufficient Funds</option>
+                                        <option value="Stolen Card">Stolen Card</option>
+                                        <option value="Invalid Card">Invalid Card</option>
+                                        <option value="Expired Card">Expired Card</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label></label>
+                                    <div class="field-content">
+                                        <div class="item"><input type="checkbox" id="addBankCheckbox"><label for="addBankCheckbox">Add Bank</label></div>
+                                        <div class="item"><input type="checkbox" id="addCardCheckbox"><label for="addCardCheckbox">Add Card</label></div>
+                                        <div id="lastFourWrapper" class="item hidden"><input type="text" id="lastFourInput" placeholder="XXXX" maxlength="4"></div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Section 5: Payment Processing (Unified) -->
+                            <section class="form-section">
+                                <h2 class="section-header">Payment Processing</h2>
+                                <div class="form-group">
+                                    <label></label>
+                                    <div class="field-content">
+                                        <div class="item">
+                                            <input type="checkbox" id="processPaymentCheckbox">
+                                            <label for="processPaymentCheckbox">Process a Payment?</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="paymentDetailsUnified" class="hidden">
+                                    <!-- Payment Type (Once-off, PD/ADV from Inbound, or standard Collections payment) -->
+                                    <div class="form-group">
+                                        <label>Payment Type:</label>
+                                        <div class="field-content radio-group">
+                                            <div class="item"><input type="radio" id="paymentTypeOnceOff" name="paymentTypeUnified" value="OnceOff"><label for="paymentTypeOnceOff">Once-Off</label></div>
+                                            <div class="item"><input type="radio" id="paymentTypeScheduled" name="paymentTypeUnified" value="Scheduled"><label for="paymentTypeScheduled">Scheduled/Arrears</label></div>
+                                            <div class="item"><input type="radio" id="paymentTypePDADV" name="paymentTypeUnified" value="PDADV"><label for="paymentTypePDADV">PD / ADV</label></div>
+                                        </div>
+                                    </div>
+                                    <!-- Fields for Once-Off Payment -->
+                                    <div id="onceOffPaymentFields" class="conditional-payment-section hidden">
+                                        <div class="form-group"><label for="onceOffPaymentAmount">Amount ($):</label><input type="text" id="onceOffPaymentAmount" placeholder="0.00"></div>
+                                        <div class="form-group"><label></label><span class="info-text">Advised $2.95 fee</span></div>
+                                    </div>
+                                    <!-- Fields for Scheduled/Arrears Payment (Collections) -->
+                                    <div id="scheduledPaymentFields" class="conditional-payment-section hidden">
+                                        <div id="amountInputsContainer"></div> <!-- Dynamic amount rows from collections -->
+                                        <div class="form-group">
+                                            <label>Status:</label>
+                                            <div class="field-content radio-group">
+                                                <div class="item"><input type="radio" id="statusArrears" name="accountStatus" value="Arrears"><label for="statusArrears">Arrears</label></div>
+                                                <div class="item"><input type="radio" id="statusCurrent" name="accountStatus" value="Current"><label for="statusCurrent">Current</label></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fields for PD/ADV Payment (Inbound) -->
+                                    <div id="pdAdvPaymentFields" class="conditional-payment-section hidden">
+                                         <div class="form-group">
+                                            <label>Option:</label>
+                                            <div class="field-content radio-group">
+                                                <div class="item"><input type="radio" id="pdAdvTypeAdvance" name="pdAdvSubType" value="Advance"><label for="pdAdvTypeAdvance">Advance</label></div>
+                                                <div class="item"><input type="radio" id="pdAdvTypePastDue" name="pdAdvSubType" value="PastDue"><label for="pdAdvTypePastDue">Past Due</label></div>
+                                            </div>
+                                        </div>
+                                        <div id="advancePaymentFields" class="conditional-payment-section hidden"><div class="form-group"><label for="advancePaymentAmount">Amount ($):</label><input type="text" id="advancePaymentAmount" placeholder="0.00"></div></div>
+                                        <div id="pastDuePaymentFields" class="conditional-payment-section hidden"><div class="form-group"><label for="pastDuePaymentAmount">Amount ($):</label><input type="text" id="pastDuePaymentAmount" placeholder="0.00"></div><div class="form-group"><label for="daysPastDue">Days Past Due:</label><input type="text" id="daysPastDue" placeholder="e.g., 30"></div></div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Section 6: Arrangements & Hardship (Collections features) -->
+                            <section class="form-section">
+                                <h2 class="section-header">Arrangements & Hardship</h2>
+                                <div class="form-group">
+                                    <label></label>
+                                    <div class="field-content">
+                                        <div class="item"><input type="checkbox" id="arrangementCheckbox"><label for="arrangementCheckbox">Arrangement</label></div>
+                                        <div class="item"><input type="checkbox" id="hardshipCheckbox"><label for="hardshipCheckbox">Hardship</label></div>
+                                    </div>
+                                </div>
+                                <div id="arrangementDetails" class="hidden">
+                                    <div class="form-group"><label>Arr. Amount ($):</label><input type="text" id="arrangementAmount" placeholder="0.00"></div>
+                                    <div class="form-group"><label>Arr. Date:</label><input type="date" id="arrangementDate"></div>
+                                </div>
+                                <div id="moveNpdWrapper" class="form-group hidden"><label>Move NPD to:</label><div class="field-content"><span id="moveNpdDisplay"></span></div></div>
+                            </section>
+
+                            <!-- Section 7: Housekeeping (Unified) -->
+                            <section class="form-section">
+                                <h2 class="section-header">Housekeeping</h2>
+                                <div class="form-group">
+                                    <label>Changes:</label>
+                                    <div class="field-content-row">
+                                        <div class="item"><input type="checkbox" id="emailChanged"><label for="emailChanged">Update Email?</label></div>
+                                        <div class="item"><input type="checkbox" id="atpChanged"><label for="atpChanged">Update ATP?</label></div>
+                                    </div>
+                                </div>
+                                <div class="form-group hidden" id="newEmailGroup"><label for="newEmail">New Email:</label><input type="text" id="newEmail" placeholder="New Email Address"></div>
+                                <div id="atpOptionsWrapper" class="form-group hidden">
+                                    <label></label>
+                                    <div class="field-content atp-options-group">
+                                        <div class="radio-group">
+                                            <div class="item"><input type="radio" id="newAtpOption" name="atpUpdateType" value="New ATP"><label for="newAtpOption">New ATP</label></div>
+                                            <div class="item"><input type="radio" id="currentAtpOption" name="atpUpdateType" value="Current ATP"><label for="currentAtpOption">Current ATP</label></div>
+                                        </div>
+                                        <div id="newAtpFields" class="atp-detail-fields hidden"><div class="form-group"><label>Name:</label><input type="text" id="newAtpName" placeholder="ATP Name"></div><div class="form-group"><label>Email:</label><input type="text" id="newAtpEmail" placeholder="ATP Email"></div><div class="form-group"><label>Phone:</label><input type="text" id="newAtpPhone" placeholder="ATP Phone" maxlength="10"></div><div class="form-group"><label>Relationship:</label><input type="text" id="newAtpRelationship" placeholder="Relationship"></div></div>
+                                        <div id="currentAtpFields" class="atp-detail-fields hidden"><div class="form-group"><label>Update Name:</label><input type="text" id="currentAtpName" placeholder="Update Name"></div><div class="form-group"><label>Update Email:</label><input type="text" id="currentAtpEmail" placeholder="Update Email"></div><div class="form-group"><label>Update Phone:</label><input type="text" id="currentAtpPhone" placeholder="Update Phone"></div></div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Section 8: Recap & Agent Resolution -->
+                            <section class="form-section">
+                                <h2 class="section-header">Recap & Resolution</h2>
+                                 <div class="form-group align-top">
+                                    <label for="agentResolution">Agent Resolution:</label>
+                                    <textarea id="agentResolution" placeholder="Describe steps taken and resolution provided..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Options:</label>
+                                    <div class="field-content checkbox-row">
+                                        <div class="item flex-row">
+                                            <input type="checkbox" id="advisedNpdCheckbox"><label for="advisedNpdCheckbox">Advised NPD</label>
+                                            <input type="date" id="advisedNpdInput" class="input-short" disabled>
+                                        </div>
+                                        <div class="item"><input type="checkbox" id="selfHelpCheckbox"><label for="selfHelpCheckbox">Offered Self-Help</label></div>
+                                        <div class="item"><input type="checkbox" id="surveyCheckbox"><label for="surveyCheckbox">Offered Survey</label></div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div> <!-- End of answeredCallDetailsSection -->
+
+                        <div class="button-group">
+                            <button type="button" id="copyToClipboardButton">Copy to Clipboard</button>
+                            <button type="button" id="newNoteButton">New Note</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="hardshipContentPanel" class="tab-content hidden">
+                 <div class="form-container">
+                    <div class="advisement"><i>"To help our team understand your situation better, I need to ask a few questions. Please know there are no wrong answers, and if any question makes you uncomfortable, just let me know and we can skip it. Once we're done, I'll forward this to our dedicated hardship team for assessment. Is that okay with you?"</i></div>
+                    <div class="form-group"><label for="hardshipCategory">Hardship Category:</label><select id="hardshipCategory"><option value="unemployed">Lost Job or Unemployed</option><option value="reducedIncome">Reduced Income</option><option value="overcommitted">Overcommitted</option><option value="unexpectedBills">Unexpected Bills</option><option value="injuryIllness">Injury or Illness</option><option value="familyBreakdown">Family Breakdown</option><option value="financialAbuse">Domestic or Financial Abuse</option><option value="naturalDisaster">Natural Disaster</option><option value="other">Other</option></select></div>
+                    <div id="hardshipQuestionsContainer"></div>
+                    <div class="section-header">Set Expectations</div>
+                    <ul class="expectations-list">
+                        <li>Someone will get back to you within 5 business days.</li>
+                        <li>If we are unable to reach out via phone we will send you an email.</li>
+                        <li>We might require some supporting documentation from you to help with your assessment.</li>
+                        <li>We have temporarily Paused your repayments until we have completed our Hardship assessment and have a resolution for you.</li>
+                    </ul>
+                    <!-- Buttons for hardship panel can be added here if needed -->
+                 </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <div id="notification" class="notification-bar"></div>
+        </footer>
+    </div>
+    <script src="hardshipData.js" defer></script> <!-- Renamed hardship.js to hardshipData.js -->
+    <script src="notes.js" defer></script>
+</body>
+</html>
