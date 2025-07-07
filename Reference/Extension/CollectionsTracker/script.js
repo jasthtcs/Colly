@@ -1,11 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     const themes = [
-        { name: 'Ube Delight', className: 'theme-default', color: '#7F5AF0' },
-        { name: 'Crimson Crush', className: 'theme-crimson', color: '#D32F2F' },
-        { name: 'Midnight Depths', className: 'theme-midnight', color: '#1E88E5' },
-        { name: 'Emerald Fields', className: 'theme-emerald', color: '#43A047' },
-        { name: 'Golden Hour', className: 'theme-golden', color: '#FFB300' }
+        { name: 'Ube Delight', className: 'theme-default', color: '#6750A4' }, // Updated to MD3 base Purple
+        { name: 'Crimson Crush', className: 'theme-crimson', color: '#B71C1C' }, // Material Red 900
+        { name: 'Midnight Depths', className: 'theme-midnight', color: '#0D47A1' }, // Material Blue 900
+        { name: 'Emerald Fields', className: 'theme-emerald', color: '#1B5E20' }, // Material Green 900
+        { name: 'Golden Hour', className: 'theme-golden', color: '#FF6F00' }, // Material Amber 900
+        { name: 'Deep Ocean', className: 'theme-ocean', color: '#006978' }, // Teal-like color
+        { name: 'Forest Canopy', className: 'theme-forest', color: '#386A20' }  // Dark Green
     ];
 
     const masterSchedule = [
@@ -62,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
             nextActionEl.textContent = '—';
             taskItem1.style.display = 'none';
             taskItem2.style.display = 'none';
+            dayInput.value = ''; // Clear invalid input
             return;
         }
 
@@ -95,55 +98,88 @@ document.addEventListener('DOMContentLoaded', function() {
     dayForm.addEventListener('submit', function(e) {
         e.preventDefault();
         updateUI();
+        // dayInput.focus(); // Optionally refocus after submit for quick entry
     });
-    
+
     function applyTheme(themeClassName) {
-        document.body.classList.remove(...themes.map(t => t.className));
-        if (themeClassName !== 'theme-default') {
+        // Remove all theme classes
+        themes.forEach(t => document.body.classList.remove(t.className));
+
+        // Add the selected theme class (if it's not the default placeholder)
+        if (themeClassName !== 'theme-default') { // 'theme-default' is our base, no specific class needed beyond :root
             document.body.classList.add(themeClassName);
         }
+
         localStorage.setItem('selectedTheme', themeClassName);
         updateActiveSwatch(themeClassName);
-        
+
         activeTheme = themes.find(t => t.className === themeClassName);
         if (activeTheme) {
             themeNameDisplay.textContent = activeTheme.name;
-            themeNameDisplay.style.color = activeTheme.color;
+            // themeNameDisplay.style.color = activeTheme.color; // Color is now handled by CSS vars
+        } else {
+            // Fallback for safety, though should always find one
+            const defaultTheme = themes[0];
+            themeNameDisplay.textContent = defaultTheme.name;
+            // themeNameDisplay.style.color = defaultTheme.color;
         }
     }
-    
-    function updateActiveSwatch(activeClassName) { document.querySelectorAll('.swatch').forEach(swatch => { swatch.classList.toggle('active', swatch.dataset.themeClass === activeClassName); }); }
-    
+
+    function updateActiveSwatch(activeClassName) {
+        document.querySelectorAll('.swatch').forEach(swatch => {
+            swatch.classList.toggle('active', swatch.dataset.themeClass === activeClassName);
+        });
+    }
+
     themes.forEach(theme => {
         const swatch = document.createElement('button');
         swatch.className = 'swatch';
-        swatch.title = theme.name; 
-        swatch.style.backgroundColor = theme.color;
-        swatch.style.color = theme.color;
+        swatch.title = theme.name;
+        swatch.style.backgroundColor = theme.color; // This sets the swatch's visual color
         swatch.dataset.themeClass = theme.className;
-        
+
         swatch.addEventListener('click', () => applyTheme(theme.className));
 
+        // Update theme name display on hover/focus for immediate feedback
         swatch.addEventListener('mouseover', () => {
             themeNameDisplay.textContent = theme.name;
-            themeNameDisplay.style.color = theme.color;
+        });
+        swatch.addEventListener('focus', () => { // Good for accessibility
+            themeNameDisplay.textContent = theme.name;
         });
         swatch.addEventListener('mouseout', () => {
+            if (activeTheme) { // Revert to the currently active theme name
+                themeNameDisplay.textContent = activeTheme.name;
+            }
+        });
+        swatch.addEventListener('blur', () => { // Revert on blur as well
             if (activeTheme) {
                 themeNameDisplay.textContent = activeTheme.name;
-                themeNameDisplay.style.color = activeTheme.color;
             }
         });
 
         themeSwatchesContainer.appendChild(swatch);
     });
 
-    settingsButton.addEventListener('click', () => themeMenu.classList.toggle('hidden'));
-    darkModeSwitch.addEventListener('change', () => { document.body.classList.toggle('dark-mode', darkModeSwitch.checked); localStorage.setItem('mode', darkModeSwitch.checked ? 'dark' : 'light'); });
-    
-    const savedTheme = localStorage.getItem('selectedTheme') || 'theme-default';
-    applyTheme(savedTheme);
-    if (localStorage.getItem('mode') === 'dark') { document.body.classList.add('dark-mode'); darkModeSwitch.checked = true; }
-    
-    updateUI();
+    settingsButton.addEventListener('click', () => {
+        themeMenu.classList.toggle('hidden');
+        settingsButton.classList.toggle('open'); // For rotating the icon
+        settingsButton.setAttribute('aria-expanded', !themeMenu.classList.contains('hidden'));
+    });
+
+    darkModeSwitch.addEventListener('change', () => {
+        document.body.classList.toggle('dark-mode', darkModeSwitch.checked);
+        localStorage.setItem('mode', darkModeSwitch.checked ? 'dark' : 'light');
+    });
+
+    // Load saved theme and mode
+    const savedTheme = localStorage.getItem('selectedTheme') || 'theme-default'; // Default to 'theme-default'
+    applyTheme(savedTheme); // This will also set activeTheme and update display initially
+
+    if (localStorage.getItem('mode') === 'dark') {
+        document.body.classList.add('dark-mode');
+        darkModeSwitch.checked = true;
+    }
+
+    updateUI(); // Initial UI update based on empty/potential stored input (though not implemented)
 });
